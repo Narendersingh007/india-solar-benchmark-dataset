@@ -2,6 +2,12 @@ import numpy as np
 import pandas as pd
 
 class FeatureEngineer:
+    def __init__(self):
+        self.city = CityEnricher()
+        self.cyclic = CyclicFeatureGenerator()
+        self.lag = LagFeatureGenerator()
+        self.rolling = RollingFeatureGenerator()
+        
     def transform(
         self,
         df: pd.DataFrame,
