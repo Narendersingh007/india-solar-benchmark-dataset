@@ -11,4 +11,4 @@ class BaseWeatherClient(ABC):
     def fetch_hourly_data(self,city : City , year_chunk : YearChunk,)->DownloadResult:
         """Fetch hourly data from a weather provider."""
 
-        raise NotImplementedError
+        raise NotImplementedError()
