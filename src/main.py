@@ -3,6 +3,7 @@ from downloader.session import create_session
 from services.downloader_service import DownloaderService
 from storage.file_storage import FileStorage
 from utils.config import config
+from pipeline.dataset_pipeline import DatasetPipeline
 
 def main():
     session = create_session()

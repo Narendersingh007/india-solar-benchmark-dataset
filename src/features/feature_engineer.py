@@ -2,21 +2,24 @@ import numpy as np
 import pandas as pd
 
 class FeatureEngineer:
-    def __init__(self):
-        self.city = CityEnricher()
-        self.cyclic = CyclicFeatureGenerator()
-        self.lag = LagFeatureGenerator()
-        self.rolling = RollingFeatureGenerator()
-        
+
+
     def transform(
         self,
         df: pd.DataFrame,
     ):
         df = df.copy()
-        dt = pd.to_datetime(
-            df["YYYYMMDDHH"],
-            format="%Y%m%d%H",
-        )
+        if "datetime" in df.columns:
+            dt = pd.to_datetime(df["datetime"])
+        else:
+            dt = pd.to_datetime(
+                dict(
+                    year=df["YEAR"],
+                    month=df["MO"],
+                    day=df["DY"],
+                    hour=df["HR"],
+                )
+            )
         df["datetime"] = dt
         df["year"] = dt.dt.year
         df["month"] = dt.dt.month

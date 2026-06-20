@@ -1,7 +1,6 @@
 cities:
 
 # North
-
 - name: New_Delhi
   latitude: 28.6139
   longitude: 77.2090
@@ -21,6 +20,26 @@ cities:
 - name: Srinagar
   latitude: 34.0837
   longitude: 74.7973
+
+- name: Amritsar
+  latitude: 31.6340
+  longitude: 74.8723
+
+- name: Jammu
+  latitude: 32.7266
+  longitude: 74.8570
+
+- name: Ludhiana
+  latitude: 30.9000
+  longitude: 75.8573
+
+- name: Agra
+  latitude: 27.1767
+  longitude: 78.0081
+
+- name: Meerut
+  latitude: 28.9845
+  longitude: 77.7064
 
 # West
 
@@ -44,6 +63,26 @@ cities:
   latitude: 26.2389
   longitude: 73.0243
 
+- name: Surat
+  latitude: 21.1702
+  longitude: 72.8311
+
+- name: Vadodara
+  latitude: 22.3072
+  longitude: 73.1812
+
+- name: Rajkot
+  latitude: 22.3039
+  longitude: 70.8022
+
+- name: Nashik
+  latitude: 19.9975
+  longitude: 73.7898
+
+- name: Udaipur
+  latitude: 24.5854
+  longitude: 73.7125
+
 # South
 
 - name: Chennai
@@ -66,6 +105,26 @@ cities:
   latitude: 12.2958
   longitude: 76.6394
 
+- name: Coimbatore
+  latitude: 11.0168
+  longitude: 76.9558
+
+- name: Madurai
+  latitude: 9.9252
+  longitude: 78.1198
+
+- name: Visakhapatnam
+  latitude: 17.6868
+  longitude: 83.2185
+
+- name: Mangalore
+  latitude: 12.9141
+  longitude: 74.8560
+
+- name: Thiruvananthapuram
+  latitude: 8.5241
+  longitude: 76.9366
+
 # East
 
 - name: Kolkata
@@ -84,11 +143,31 @@ cities:
   latitude: 23.3441
   longitude: 85.3096
 
-- name: Guwahati
-  latitude: 26.1445
-  longitude: 91.7362
+- name: Cuttack
+  latitude: 20.4625
+  longitude: 85.8830
 
-# Central
+- name: Durgapur
+  latitude: 23.5204
+  longitude: 87.3119
+
+- name: Asansol
+  latitude: 23.6739
+  longitude: 86.9524
+
+- name: Siliguri
+  latitude: 26.7271
+  longitude: 88.3953
+
+- name: Gaya
+  latitude: 24.7914
+  longitude: 85.0002
+
+- name: Muzaffarpur
+  latitude: 26.1209
+  longitude: 85.3647
+
+# Central + North-East
 
 - name: Bhopal
   latitude: 23.2599
@@ -102,10 +181,30 @@ cities:
   latitude: 21.2514
   longitude: 81.6296
 
-- name: Lucknow
-  latitude: 26.8467
-  longitude: 80.9462
+- name: Indore
+  latitude: 22.7196
+  longitude: 75.8577
 
-- name: Kanpur
-  latitude: 26.4499
-  longitude: 80.3319
+- name: Jabalpur
+  latitude: 23.1815
+  longitude: 79.9864
+
+- name: Guwahati
+  latitude: 26.1445
+  longitude: 91.7362
+
+- name: Shillong
+  latitude: 25.5788
+  longitude: 91.8933
+
+- name: Agartala
+  latitude: 23.8315
+  longitude: 91.2868
+
+- name: Imphal
+  latitude: 24.8170
+  longitude: 93.9368
+
+- name: Aizawl
+  latitude: 23.7271
+  longitude: 92.7176
