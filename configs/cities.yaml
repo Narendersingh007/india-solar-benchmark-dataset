@@ -1,0 +1,21 @@
+cities:
+
+  - name: New_Delhi
+    latitude: 28.6139
+    longitude: 77.2090
+
+  - name: Chennai
+    latitude: 13.0827
+    longitude: 80.2707
+
+  - name: Jodhpur
+    latitude: 26.2389
+    longitude: 73.0243
+
+  - name: Shimla
+    latitude: 31.1048
+    longitude: 77.1734
+
+  - name: Kolkata
+    latitude: 22.5726
+    longitude: 88.3639

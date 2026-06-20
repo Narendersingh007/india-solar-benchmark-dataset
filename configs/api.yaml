@@ -1,0 +1,14 @@
+base_url  : "https://power.larc.nasa.gov/api/temporal/hourly/point"
+community: "ag"
+
+format: "CSV"
+
+units: "metric"
+
+time_standard: "lst"
+
+request_timeout: 60
+
+retry_attempts: 3
+
+retry_delay: 2

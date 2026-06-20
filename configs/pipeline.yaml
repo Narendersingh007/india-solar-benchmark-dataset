@@ -1,0 +1,35 @@
+years:
+
+  - start: 20190101
+    end: 20191231
+
+  - start: 20200101
+    end: 20201231
+
+  - start: 20210101
+    end: 20211231
+
+  - start: 20220101
+    end: 20221231
+
+  - start: 20230101
+    end: 20231231
+
+parameters:
+
+  - ALLSKY_SFC_SW_DWN
+  - T2M
+  - RH2M
+  - WS10M
+  - PRECTOTCORR
+  - ALLSKY_KT
+  - T2MDEW
+  - PS
+  - WS2M
+  - WD10M
+  - ALLSKY_SFC_LW_DWN
+  - ALLSKY_SFC_PAR_TOT
+
+output_directory: "data/raw"
+
+sleep_between_requests: 2
