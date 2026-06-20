@@ -16,7 +16,9 @@ def main():
         client=client,
         storage=storage,
     )
+    pipeline = DatasetPipeline()
     downloader.download_all()
+    pipeline.run()
 
 if __name__ == "__main__":
     main()
