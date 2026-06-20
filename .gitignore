@@ -1,48 +1,35 @@
+
 # Python
+
 __pycache__/
 *.py[cod]
-*.so
-
-# Virtual Environment
 .venv/
-venv/
-
-# Environment
-.env
-
-# Logs
-logs/
-*.log
-
-# macOS
-.DS_Store
-
-# Jupyter
-.ipynb_checkpoints/
-
-# VSCode
-.vscode/
-
-# pytest
-.pytest_cache/
-
-# Ruff
-.ruff_cache/
-
-# mypy
-.mypy_cache/
-
-# Build
-dist/
-build/
-*.egg-info/
 
 # Data
+
 data/raw/*
 !data/raw/.gitkeep
 
 data/processed/*
 !data/processed/.gitkeep
 
+data/interim/*
+!data/interim/.gitkeep
+
 data/ml_ready/*
 !data/ml_ready/.gitkeep
+
+data/metadata/*
+!data/metadata/city_metadata.csv
+
+# Logs
+
+logs/
+
+# macOS
+
+.DS_Store
+
+# Jupyter
+
+.ipynb_checkpoints/
