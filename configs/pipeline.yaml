@@ -1,20 +1,25 @@
 years:
 
-  - start: 20190101
-    end: 20191231
+- start: 20190101
+  end: 20191231
 
-  - start: 20200101
-    end: 20201231
+- start: 20200101
+  end: 20201231
 
-  - start: 20210101
-    end: 20211231
+- start: 20210101
+  end: 20211231
 
-  - start: 20220101
-    end: 20221231
+- start: 20220101
+  end: 20221231
 
-  - start: 20230101
-    end: 20231231
+- start: 20230101
+  end: 20231231
 
+- start: 20240101
+  end: 20241231
+
+- start: 20250101
+  end: 20251231
 parameters:
 
   - ALLSKY_SFC_SW_DWN
