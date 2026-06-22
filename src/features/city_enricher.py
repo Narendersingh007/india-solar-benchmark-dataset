@@ -5,8 +5,10 @@ class CityEnricher:
         self.metadata = pd.read_csv(
             "data/metadata/city_metadata.csv"
         )
-
     def transform(self, df):
+        metadata = pd.read_csv(
+            "data/metadata/city_metadata.csv"
+        )
         return df.merge(
             self.metadata,
             on="CITY",

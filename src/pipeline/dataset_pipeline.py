@@ -3,7 +3,7 @@ from processing.cleaner import DataCleaner
 from features.feature_engineer import FeatureEngineer
 from validation.validator import DatasetValidator
 from metadata.metadata_generator import MetadataGenerator
-
+from pathlib import Path
 from utils.logger import logger
 
 
@@ -17,10 +17,20 @@ class DatasetPipeline:
         self.metadata = MetadataGenerator()
     def run(self):
         logger.info("Starting dataset pipeline")
+        self.metadata.generate_city_metadata()
         df = self.merger.merge_all()
         df = self.cleaner.clean(df)
         df = self.feature_engineer.transform(df)
         self.validator.validate(df)
+        ml_ready_dir = Path("data/ml_ready")
+        ml_ready_dir.mkdir(
+            parents=True,
+            exist_ok=True,
+        )
+        df.to_parquet(
+            ml_ready_dir / "india_multicity_ml_ready.parquet",
+            index=False,
+        )
         self.metadata.generate(df)
         logger.info("Dataset pipeline completed")
         return df
