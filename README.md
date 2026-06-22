@@ -9,10 +9,17 @@
 ![License](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey)
 
 **Dataset Size:** 4.38M rows • 60 features • 50 cities • 10 years of hourly observations
-
 A large-scale, multi-city solar irradiance forecasting dataset for India built from NASA POWER meteorological observations and enhanced with temporal, geographical, solar-geometry, physics-informed, lag, and rolling statistical features.
-
 The dataset contains hourly weather and solar measurements collected across 50 major Indian cities from 2016 to 2025, providing a unified dataset for solar energy forecasting, renewable energy research, time-series modeling, and machine learning applications.
+
+## Dataset Availability
+
+| Platform | Link |
+|----------|----------|
+| GitHub Repository | https://github.com/Narendersingh007/india-solar-benchmark-dataset |
+| Kaggle Dataset | https://www.kaggle.com/datasets/narendersingh007/india-solar-benchmark-dataset |
+| Hugging Face Dataset | https://huggingface.co/datasets/Narendersingh007/india-solar-benchmark-dataset |
+| GitHub Release | v1.0 |
 
 ## Table of Contents
 
