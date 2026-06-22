@@ -3,6 +3,7 @@ from processing.cleaner import DataCleaner
 from features.feature_engineer import FeatureEngineer
 from validation.validator import DatasetValidator
 from metadata.metadata_generator import MetadataGenerator
+from processing.dataset_splitter import DatasetSplitter
 from pathlib import Path
 from utils.logger import logger
 
@@ -13,6 +14,7 @@ class DatasetPipeline:
         self.merger = CSVMerger()
         self.cleaner = DataCleaner()
         self.feature_engineer = FeatureEngineer()
+        self.splitter = DatasetSplitter()
         self.validator = DatasetValidator()
         self.metadata = MetadataGenerator()
     def run(self):
@@ -22,6 +24,7 @@ class DatasetPipeline:
         df = self.cleaner.clean(df)
         df = self.feature_engineer.transform(df)
         self.validator.validate(df)
+        self.splitter.split(df)
         ml_ready_dir = Path("data/ml_ready")
         ml_ready_dir.mkdir(
             parents=True,
