@@ -1,9 +1,20 @@
 import numpy as np
 import pandas as pd
+from features.city_enricher import CityEnricher
+from features.cyclic_features import CyclicFeatureGenerator
+from features.physics_features import PhysicsFeatureGenerator
+from features.lag_features import LagFeatureGenerator
+from features.rolling_features import RollingFeatureGenerator
+from features.solar_features import  SolarFeatureGenerator
 
 class FeatureEngineer:
-
-
+    def __init__(self):
+        self.city = CityEnricher()
+        self.cyclic = CyclicFeatureGenerator()
+        self.physics = PhysicsFeatureGenerator()
+        self.lag = LagFeatureGenerator()
+        self.rolling = RollingFeatureGenerator()
+        self.solar = SolarFeatureGenerator()
     def transform(
         self,
         df: pd.DataFrame,
@@ -20,6 +31,7 @@ class FeatureEngineer:
                     hour=df["HR"],
                 )
             )
+        df["dayofyear"] = dt.dt.dayofyear
         df["datetime"] = dt
         df["year"] = dt.dt.year
         df["month"] = dt.dt.month
@@ -31,17 +43,12 @@ class FeatureEngineer:
         df["is_weekend"] = (
             df["weekday"] >= 5
         ).astype(int)
-        df["hour_sin"] = np.sin(
-            2 * np.pi * df["hour"] / 24
-        )
-        df["hour_cos"] = np.cos(
-            2 * np.pi * df["hour"] / 24
-        )
-        df["month_sin"] = np.sin(
-            2 * np.pi * df["month"] / 12
-        )
-        df["month_cos"] = np.cos(
-            2 * np.pi * df["month"] / 12
-        )
+        df = self.city.transform(df)
+        df = self.solar.transform(df)
+        df = self.cyclic.transform(df)
+        df = self.physics.transform(df)
+        df = df.sort_values(["CITY", "datetime"]).reset_index(drop=True)
+        df = self.lag.transform(df)
+        df = self.rolling.transform(df)
 
         return df
