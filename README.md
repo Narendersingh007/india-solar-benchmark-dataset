@@ -167,7 +167,7 @@ docs/         Additional documentation
 Clone the repository:
 
 ```bash
-git clone https://github.com/<username>/solar-benchmark-dataset.git
+git clone https://github.com/Narendersingh007/solar-benchmark-dataset.git
 cd solar-benchmark-dataset
 ```
 
@@ -258,7 +258,7 @@ If you use this dataset in your research, publication, or project, please cite:
   author={Narender Singh},
   year={2026},
   publisher={GitHub},
-  url={https://github.com/<username>/solar-benchmark-dataset}
+  url={https://github.com/Narendersingh007/solar-benchmark-dataset}
 }
 ```
 
