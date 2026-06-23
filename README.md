@@ -1,4 +1,4 @@
-# India Solar Benchmark Dataset
+# India Solar Benchmark Dataset Generation Pipeline
 
 ![Python](https://img.shields.io/badge/Python-3.10+-blue)
 ![Years](https://img.shields.io/badge/Years-2016--2025-blueviolet)
@@ -7,25 +7,43 @@
 ![Features](https://img.shields.io/badge/Features-60-red)
 ![Version](https://img.shields.io/badge/version-v1.0-success)
 ![License](https://img.shields.io/badge/License-CC--BY--4.0-lightgrey)
+[![Kaggle Dataset](https://img.shields.io/badge/Kaggle-Dataset-20BEFF?logo=kaggle&logoColor=white)](https://www.kaggle.com/datasets/narendersingh007/india-solar-benchmark-dataset)
+[![Hugging Face](https://img.shields.io/badge/HuggingFace-Dataset-FFD21E?logo=huggingface&logoColor=black)](https://huggingface.co/datasets/Narendersingh007/india-solar-benchmark-dataset)
+[![GitHub Release](https://img.shields.io/github/v/release/Narendersingh007/india-solar-benchmark-dataset)](https://github.com/Narendersingh007/india-solar-benchmark-dataset/releases)
 
-**Dataset Size:** 4.38M rows • 60 features • 50 cities • 10 years of hourly observations
-A large-scale, multi-city solar irradiance forecasting dataset for India built from NASA POWER meteorological observations and enhanced with temporal, geographical, solar-geometry, physics-informed, lag, and rolling statistical features.
-The dataset contains hourly weather and solar measurements collected across 50 major Indian cities from 2016 to 2025, providing a unified dataset for solar energy forecasting, renewable energy research, time-series modeling, and machine learning applications.
+A reproducible large-scale data engineering, feature engineering, and benchmark dataset generation pipeline for solar irradiance forecasting research.
+The pipeline automatically collects meteorological observations from NASA POWER across multiple Indian cities, performs validation and preprocessing, generates temporal, geographical, solar-geometry, physics-informed, lag, and rolling statistical features, and exports machine-learning-ready benchmark datasets with standardized train, validation, and test splits.
+
+The first public release generated the India Solar Benchmark Dataset v1.0 — one of the largest publicly available solar forecasting datasets for India, containing 4.38 million hourly observations spanning 50 cities over 10 years.
+  
+## Generated Dataset
+The pipeline currently produces the **India Solar Benchmark Dataset v1.0**, a large-scale benchmark dataset designed for solar irradiance forecasting and renewable energy research.
+### Dataset Statistics
+
+| Metric | Value |
+|----------|----------|
+| Cities | 50 |
+| Years | 2016–2025 |
+| Rows | 4,383,600 |
+| Features | 60 |
+| Target | ALLSKY_SFC_SW_DWN |
+| Storage | Parquet |
 
 ## Dataset Availability
 
-| Platform | Link |
-|----------|----------|
+| Platform | Access |
+|-----------|-----------|
 | GitHub Repository | https://github.com/Narendersingh007/india-solar-benchmark-dataset |
+| GitHub Release (v1.0) | https://github.com/Narendersingh007/india-solar-benchmark-dataset/releases |
 | Kaggle Dataset | https://www.kaggle.com/datasets/narendersingh007/india-solar-benchmark-dataset |
 | Hugging Face Dataset | https://huggingface.co/datasets/Narendersingh007/india-solar-benchmark-dataset |
-| GitHub Release | v1.0 |
 
 ## Table of Contents
 
 - [Dataset Overview](#dataset-overview)
-- [Key Highlights](#key-highlights)
+- [Engineering Highlights](#engineering-highlights)
 - [Intended Use Cases](#intended-use-cases)
+- [Pipeline Architecture](#pipeline-architecture)
 - [Dataset Generation Pipeline](#dataset-generation-pipeline)
 - [Feature Groups](#feature-groups)
 - [Train / Validation / Test Split](#train--validation--test-split)
@@ -56,18 +74,17 @@ The dataset contains hourly weather and solar measurements collected across 50 m
 
 The primary prediction target is `ALLSKY_SFC_SW_DWN` — the hourly all-sky surface shortwave downward irradiance (Global Horizontal Irradiance, GHI), measured in W/m².
 
+## Engineering Highlights
 
-## Key Highlights
-
-- 50 Indian cities covering diverse climatic zones
-- 10 years of hourly observations (2016–2025)
-- 4.38 million records, 60 engineered features
-- NASA POWER weather and solar variables
-- Solar geometry features generated using PVLIB
-- Physics-informed feature engineering
-- Time-series lag and rolling window features
-- Chronological train, validation, and test splits
-
+- Automated collection of 500 NASA POWER city-year files
+- Configuration-driven pipeline using YAML
+- Modular ETL architecture
+- Deterministic feature engineering workflow
+- Automated metadata and validation generation
+- Reproducible benchmark creation process
+- Parquet-based storage optimization
+- Chronological leakage-safe dataset splitting
+  
 ## Intended Use Cases
 
 - Solar irradiance forecasting
@@ -77,9 +94,20 @@ The primary prediction target is `ALLSKY_SFC_SW_DWN` — the hourly all-sky surf
 - Physics-informed machine learning
 - Feature engineering studies and energy systems research
 
+## Pipeline Architecture
+
+The repository follows a modular ETL architecture:
+
+1. Data Acquisition Layer
+2. Data Processing Layer
+3. Feature Engineering Layer
+4. Validation Layer
+5. Metadata Generation Layer
+6. Dataset Packaging Layer
+
+Each stage is independently configurable and reproducible, enabling benchmark dataset generation for new cities, regions, and forecasting tasks with minimal changes.
 ## Dataset Generation Pipeline
 <img width="912" height="722" alt="Screenshot 2026-06-23 at 4 49 37 PM" src="https://github.com/user-attachments/assets/3373e4ff-b5b3-485a-a508-506ad6da430e" />
-
 
 ## Feature Groups
 
@@ -105,15 +133,12 @@ Full schema and column definitions are available in `data/metadata/schema.csv`.
 | Test | 2024–2025 | Final evaluation |
 
 The dataset uses chronological splitting to prevent temporal leakage and mimic real-world forecasting scenarios, where models must predict future observations using only historical information.
-
 **Leakage prevention:** avoid random shuffling across years, using future lag values, computing rolling statistics with future timestamps, or training on validation/test periods.
 
 ## Geographic Coverage
 
 The dataset spans 50 major Indian cities across North, South, East, West, Central, and Northeast India.
-
 Coverage includes:
-
 - Coastal and inland regions
 - Plains, deserts, and mountainous terrain
 - Tropical, subtropical, temperate, and semi-arid climates
@@ -133,14 +158,27 @@ This diversity enables evaluation of both city-specific and generalized solar fo
 ## Repository Structure
 
 ```text
-configs/      Configuration files
-data/         Raw, processed, metadata, and split datasets
-src/          Dataset generation pipeline
-notebooks/    Exploration and experiments
-tests/        Unit tests
-docs/         Additional documentation
-```
+src/
+├── clients/              # NASA POWER API clients
+├── downloader/           # Data acquisition
+├── processing/           # Cleaning & merging
+├── features/             # Feature engineering
+├── validation/           # Data validation
+├── metadata/             # Reports & schema generation
+├── pipeline/             # End-to-end orchestration
+├── storage/              # File management
+├── utils/                # Logging & configuration
+└── main.py
 
+configs/                  # YAML configurations
+data/                     # Raw, processed & benchmark datasets
+docs/                     # Documentation
+tests/                    # Unit tests
+
+README.md
+requirements.txt
+LICENSE
+```
 ### File Sizes
 
 | File | Size |
