@@ -78,26 +78,8 @@ The primary prediction target is `ALLSKY_SFC_SW_DWN` — the hourly all-sky surf
 - Feature engineering studies and energy systems research
 
 ## Dataset Generation Pipeline
+<img width="912" height="722" alt="Screenshot 2026-06-23 at 4 49 37 PM" src="https://github.com/user-attachments/assets/3373e4ff-b5b3-485a-a508-506ad6da430e" />
 
-```text
-NASA POWER API
-      ↓
-50 Cities × 10 Years
-      ↓
-Data Cleaning
-      ↓
-Feature Engineering
-      ↓
-Solar & Physics Features
-      ↓
-Lag & Rolling Features
-      ↓
-ML-Ready Dataset
-      ↓
-Train / Validation / Test Splits
-```
-
-Generated automatically through a reproducible Python pipeline: raw data is collected from NASA POWER for each city/year, merged and cleaned, then enriched with temporal, solar-geometry (PVLIB), physics-informed, lag, and rolling-window features before being exported to Parquet and split chronologically.
 
 ## Feature Groups
 
