@@ -16,8 +16,13 @@ The pipeline automatically collects meteorological observations from NASA POWER 
 
 The first public release generated the India Solar Benchmark Dataset v1.0 — one of the largest publicly available solar forecasting datasets for India, containing 4.38 million hourly observations spanning 50 cities over 10 years.
   
-## Generated Dataset
-The pipeline currently produces the **India Solar Benchmark Dataset v1.0**, a large-scale benchmark dataset designed for solar irradiance forecasting and renewable energy research.
+## Generated Benchmark Dataset
+The pipeline currently produces two benchmark datasets:
+
+| Dataset | Description |
+|----------|-------------|
+| **india_multicity_raw.parquet** | Cleaned and standardized meteorological observations directly after preprocessing, before feature engineering. Suitable for custom feature engineering and research. |
+| **india_multicity_ml_ready.parquet** | Fully engineered machine-learning-ready benchmark dataset containing temporal, solar geometry, physics-informed, lag, and rolling statistical features. |
 ### Dataset Statistics
 
 | Metric | Value |
@@ -49,6 +54,7 @@ The pipeline currently produces the **India Solar Benchmark Dataset v1.0**, a la
 - [Train / Validation / Test Split](#train--validation--test-split)
 - [Geographic Coverage](#geographic-coverage)
 - [Dataset Files](#dataset-files)
+- [File Sizes](#file-sizes)
 - [Installation](#installation)
 - [Configuration](#configuration)
 - [Usage](#usage)
@@ -69,8 +75,7 @@ The pipeline currently produces the **India Solar Benchmark Dataset v1.0**, a la
 | Features | 60 |
 | Frequency | Hourly |
 | Target | ALLSKY_SFC_SW_DWN |
-| Source | NASA POWER API |
-| Storage Format | CSV, Parquet |
+| Benchmark Files | Raw + ML-Ready Parquet |
 
 The primary prediction target is `ALLSKY_SFC_SW_DWN` — the hourly all-sky surface shortwave downward irradiance (Global Horizontal Irradiance, GHI), measured in W/m².
 
@@ -84,6 +89,8 @@ The primary prediction target is `ALLSKY_SFC_SW_DWN` — the hourly all-sky surf
 - Reproducible benchmark creation process
 - Parquet-based storage optimization
 - Chronological leakage-safe dataset splitting
+- Automatic benchmark dataset generation
+- Raw and ML-ready dataset export
   
 ## Intended Use Cases
 
@@ -98,12 +105,14 @@ The primary prediction target is `ALLSKY_SFC_SW_DWN` — the hourly all-sky surf
 
 The repository follows a modular ETL architecture:
 
-1. Data Acquisition Layer
-2. Data Processing Layer
-3. Feature Engineering Layer
-4. Validation Layer
-5. Metadata Generation Layer
-6. Dataset Packaging Layer
+| Layer | Responsibility |
+|--------|----------------|
+| Data Acquisition | NASA POWER download service |
+| Data Processing | Cleaning, merging, preprocessing |
+| Feature Engineering | Temporal, cyclical, solar, lag and rolling features |
+| Validation | Dataset integrity checks |
+| Metadata | Schema and statistical report generation |
+| Benchmark Packaging | Raw dataset, ML-ready dataset and train/validation/test splits |
 
 Each stage is independently configurable and reproducible, enabling benchmark dataset generation for new cities, regions, and forecasting tasks with minimal changes.
 ## Dataset Generation Pipeline
@@ -148,12 +157,13 @@ This diversity enables evaluation of both city-specific and generalized solar fo
 ## Dataset Files
 
 | Path | Description |
-|--------|--------|
-| `data/raw/` | Original NASA POWER API downloads |
-| `data/processed/` | Cleaned city-level datasets and merged multicity dataset |
-| `data/metadata/` | Schema, statistics, validation reports, and city metadata |
-| `data/ml_ready/india_multicity_ml_ready.parquet` | Final machine-learning-ready  dataset (4,383,600 rows × 60 features) |
-| `data/splits/` | Chronological train, validation, and test splits |
+|------|-------------|
+| data/raw/ | Original NASA POWER downloads |
+| data/processed/ | Intermediate cleaned city datasets |
+| data/benchmark/india_multicity_raw.parquet | Cleaned benchmark dataset before feature engineering |
+| data/benchmark/india_multicity_ml_ready.parquet | Final ML-ready benchmark dataset |
+| data/splits/ | Train / Validation / Test splits |
+| data/metadata/ | Schema, statistics and validation reports |
 
 ## Repository Structure
 
@@ -183,6 +193,7 @@ LICENSE
 
 | File | Size |
 |--------|--------|
+| `india_multicity_raw.parquet` | 71 MB |
 | `india_multicity_ml_ready.parquet` | 412 MB |
 | `train.parquet` | 286 MB |
 | `val.parquet` | 42 MB |
@@ -202,7 +213,12 @@ Create a virtual environment:
 
 ```bash
 python -m venv .venv
+
+# Linux / macOS
 source .venv/bin/activate
+
+# Windows
+.venv\Scripts\activate
 ```
 
 Install dependencies:
@@ -280,12 +296,11 @@ Given the same configuration files and NASA POWER API responses, the dataset can
 If you use this dataset in your research, publication, or project, please cite:
 
 ```bibtex
-@dataset{india_solar_benchmark_dataset,
-  title={India Solar Benchmark Dataset},
-  author={Narender Singh},
-  year={2026},
-  publisher={GitHub},
-  url={https://github.com/Narendersingh007/india-solar-benchmark-dataset}
+@software{india_solar_pipeline,
+  author = {Narender Singh},
+  title = {India Solar Benchmark Dataset Generation Pipeline},
+  year = {2026},
+  url = {https://github.com/Narendersingh007/india-solar-benchmark-dataset}
 }
 ```
 
