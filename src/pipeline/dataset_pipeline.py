@@ -22,18 +22,26 @@ class DatasetPipeline:
         self.metadata.generate_city_metadata()
         df = self.merger.merge_all()
         df = self.cleaner.clean(df)
-        df = self.feature_engineer.transform(df)
-        self.validator.validate(df)
-        self.splitter.split(df)
-        ml_ready_dir = Path("data/ml_ready")
-        ml_ready_dir.mkdir(
+        benchmark_dir = Path("data/benchmark")
+        benchmark_dir.mkdir(
             parents=True,
             exist_ok=True,
         )
         df.to_parquet(
-            ml_ready_dir / "india_multicity_ml_ready.parquet",
+            benchmark_dir / "india_multicity_raw.parquet",
             index=False,
         )
+        logger.info("Saved benchmark raw dataset")
+        logger.info("Saved raw benchmark dataset")
+        df = self.feature_engineer.transform(df)
+        self.validator.validate(df)
+        df.to_parquet(
+            benchmark_dir / "india_multicity_ml_ready.parquet",
+            index=False,
+        )
+
+        logger.info("Saved ML-ready benchmark dataset")
+        self.splitter.split(df)
         self.metadata.generate(df)
         logger.info("Dataset pipeline completed")
         return df
